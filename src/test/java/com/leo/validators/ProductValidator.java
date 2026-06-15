@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.text.Normalizer.normalize;
+
 public class ProductValidator {
 
     public int validate(List<Product> uiProducts,
@@ -15,15 +17,10 @@ public class ProductValidator {
 
         for(Product ui : uiProducts){
 
-            boolean found = false;
-
             for(Product api : apiProducts){
 
-                if(api.getName()
-                        .toLowerCase()
-                        .contains(ui.getName().toLowerCase())){
-
-                    found = true;
+                if(normalize(api.getName())
+                        .equals(normalize(ui.getName()))){
 
                     matches++;
 
@@ -42,19 +39,19 @@ public class ProductValidator {
 
             }
 
-            if(!found){
-
-                System.out.println(
-                        "❌ No encontrado: "
-                                + ui.getName()
-                );
-
-            }
-
         }
 
         return matches;
 
+    }
+
+    private String normalize(String text){
+
+        return text.toLowerCase()
+                .replace("playstation", "")
+                .replace("sony", "")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 
 }

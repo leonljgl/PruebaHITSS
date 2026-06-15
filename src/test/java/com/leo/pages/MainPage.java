@@ -54,7 +54,7 @@ public class MainPage extends BasePage {
     public void ordenarPorPrecio() throws InterruptedException {
         findVisible(ordenarDropDown).click();
         findVisible(menorPrecio).click();
-        new WebDriverWait(driver, Duration.ofSeconds(59));
+        new WebDriverWait(driver, Duration.ofSeconds(30));
         System.out.println(driver.getCurrentUrl());
 
         System.out.println(driver.getTitle());
@@ -87,15 +87,18 @@ public class MainPage extends BasePage {
                     .findElement(productPrice)
                     .getText();
 
-            Integer precio = Integer.valueOf(
-                    precioTexto
-                            .replace("$", "")
-                            .replace(",", "")
-                            .replace(".00", "")
-                            .trim()
+            String limpio = precioTexto
+                    .replace("$", "")
+                    .replace(",", "")
+                    .trim();
 
-            );
+            if (limpio.endsWith("00")) {
+                limpio = limpio.substring(0, limpio.length() - 2);
+            }
 
+            Integer precio = Integer.valueOf(limpio);
+            //System.out.println("Precio original: [" + precioTexto + "]");
+            //System.out.println("Longitud: " + precioTexto.length());
 
             products.add(new Product(nombre, precio));
 
@@ -103,8 +106,8 @@ public class MainPage extends BasePage {
                 break;
             }
         }
-        System.out.println("Cards encontradas: "
-                + cards.size());
+        /*System.out.println("Cards encontradas: "
+                + cards.size());*/
         return products;
     }
 }
