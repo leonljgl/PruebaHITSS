@@ -15,7 +15,7 @@ public class WaitHelper {
 
     public WaitHelper(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
     }
 
     public WebElement waitForVisibility(By locator) {
