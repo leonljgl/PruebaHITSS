@@ -54,7 +54,7 @@ public class MainPage extends BasePage {
     public void ordenarPorPrecio() throws InterruptedException {
         findVisible(ordenarDropDown).click();
         findVisible(menorPrecio).click();
-        new WebDriverWait(driver, Duration.ofSeconds(30));
+        new WebDriverWait(driver, Duration.ofSeconds(59));
         System.out.println(driver.getCurrentUrl());
 
         System.out.println(driver.getTitle());
