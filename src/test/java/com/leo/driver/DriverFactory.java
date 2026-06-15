@@ -10,32 +10,39 @@ public class DriverFactory {
 
     public static WebDriver createDriver(String browser) {
 
-        WebDriver driver;
+        WebDriver driver = null;
 
         switch (browser.toLowerCase()) {
 
             case "chrome":
+
                 WebDriverManager.chromedriver().setup();
-                //driver = new ChromeDriver();
+
                 ChromeOptions options = new ChromeOptions();
 
-                if(Boolean.parseBoolean(System.getProperty("headless","false"))){
+                if (Boolean.parseBoolean(System.getProperty("headless", "false"))) {
 
                     options.addArguments("--headless=new");
+                    options.addArguments("--window-size=1920,1080");
                     options.addArguments("--no-sandbox");
                     options.addArguments("--disable-dev-shm-usage");
-
                 }
 
+                options.addArguments("--disable-blink-features=AutomationControlled");
+                options.addArguments("--disable-infobars");
+                options.addArguments("--start-maximized");
+
+                options.addArguments(
+                        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                                "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                                "Chrome/137.0.0.0 Safari/537.36"
+                );
+
                 driver = new ChromeDriver(options);
+
                 break;
-
-            default:
-                throw new IllegalArgumentException("Browser no soportado");
         }
-
-        driver.manage().window().maximize();
-
-        return driver;
+        return driver;    
     }
+    
 }
