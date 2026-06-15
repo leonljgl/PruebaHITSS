@@ -24,6 +24,13 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = DriverFactory.createDriver("chrome");
         driver.get("https://www.liverpool.com.mx/tienda/home");
+        System.out.println(driver.getTitle());
+        System.out.println(driver.getCurrentUrl());
+
+        File src = ((TakesScreenshot) driver)
+                .getScreenshotAs(OutputType.FILE);
+
+        FileUtils.copyFile(src, new File("home.png"));
     }
 
     @AfterMethod
