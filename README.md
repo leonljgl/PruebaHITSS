@@ -93,7 +93,7 @@ The project includes a GitHub Actions workflow that:
 
 Passing workflow:
 
-https://github.com/leonljgl/PruebaHITSS/actions/runs/27527456364
+https://github.com/leonljgl/PruebaHITSS/actions/runs/27533533838
 
 ---
 
